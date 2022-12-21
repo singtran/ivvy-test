@@ -1,4 +1,5 @@
 import { Link, Head } from '@inertiajs/inertia-react';
+import route from 'ziggy-js';
 
 export default function Welcome(props) {
     return (
