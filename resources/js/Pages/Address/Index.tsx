@@ -37,7 +37,7 @@ export default function AddressPage({addresses, auth, errors} : AddressPageProps
                 { address.country_code }
             </td>
             <td className="py-4 px-6">
-                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> | <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                <Link href={route('address.edit', address.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link> | <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
             </td>
         </tr>
     ));
@@ -49,12 +49,11 @@ export default function AddressPage({addresses, auth, errors} : AddressPageProps
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Address</h2>}
         >
             <Head title="Address" />
-            {addressList && addressList.length > 0 ?
-
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 py-12">
-                <Link href={route('address.index')}>
-                    Create Address
+                <Link href={route('address.create')} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    Create New Address
                 </Link>
+                {addressList && addressList.length > 0 && (
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -82,17 +81,9 @@ export default function AddressPage({addresses, auth, errors} : AddressPageProps
                         { addressList }
                     </tbody>
                 </table>
-                No addresses found
+                )}
             </div>
-            :
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                        No addresses found
-                    </div>
-                </div>
-            </div>
-            }
+
 
         </AuthenticatedLayout>
     );

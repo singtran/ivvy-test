@@ -17,7 +17,7 @@ class AddressController extends Controller
     public function index()
     {
         // $addresses = Address::paginate(10); TODO pagination
-        return Inertia::render('Address', [
+        return Inertia::render('Address/Index', [
             'addresses' => Address::all(),
         ]);
     }
@@ -29,7 +29,9 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Address/Create', [
+            'addresses' => Address::all(),
+        ]);
     }
 
     /**
@@ -40,7 +42,12 @@ class AddressController extends Controller
      */
     public function store(StoreAddressRequest $request)
     {
-        //
+        if ($request->validated()) {
+            Address::create(array_merge(['user_id' => $request->user()->id], $request->validated()));
+        }
+        return Inertia::render('Address/Index', [
+            'addresses' => Address::all(),
+        ]);
     }
 
     /**
@@ -62,7 +69,9 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        //
+        return Inertia::render('Address/Edit', [
+            'address' => $address,
+        ]);
     }
 
     /**
@@ -74,7 +83,8 @@ class AddressController extends Controller
      */
     public function update(UpdateAddressRequest $request, Address $address)
     {
-        //
+        $address->fill($request->validated());
+        $address->save();
     }
 
     /**

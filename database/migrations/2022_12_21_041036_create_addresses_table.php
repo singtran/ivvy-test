@@ -16,15 +16,15 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('line1');
-            $table->string('line2');
-            $table->string('line3');
-            $table->string('line4');
-            $table->string('city');
-            $table->string('postcode');
-            $table->string('country_code');
-            $table->string('state_code');
-            $table->string('state_name');
+            $table->string('line1')->nullable();
+            $table->string('line2')->nullable();
+            $table->string('line3')->nullable();
+            $table->string('line4')->nullable();
+            $table->string('city')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('country_code')->nullable();
+            $table->string('state_code')->nullable();
+            $table->string('state_name')->nullable();
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
